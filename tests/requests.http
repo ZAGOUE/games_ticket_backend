@@ -1,0 +1,126 @@
+### Login Admin
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin@123"
+}
+### Login Admin 2
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "master@example.com",
+  "password": "Master@123"
+}
+
+### Login User
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "utilisateur@example.com",
+  "password": "User@123"
+}
+
+### Login Controller
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "controller@example.com",
+  "password": "Control@123"
+}
+
+### Get All Offers (Requires JWT)
+GET http://localhost:8000/api/offers
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDcwODA4NjMsImV4cCI6MTc0NzA4NDQ2Mywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlckBleGFtcGxlLmNvbSJ9.jj3tTl3q3NZWUxVc_CG07G6Tqtd0Rj6fK7wZU3Zy6jjDDO43LgTfOrfZRaZhaEODNzSREVXJtdyPsN8Sog3_V4Eb14MxEptA8fZFHtm1qP_Eynr9DYyqdYx1imSZUzZuYK0ABi4FN0wNYtbxPsgPUg2tDmTvXYbJ_oWuSBdaHRmfNEiUK34x_pd_HVA5lwWviO9ecQ0DXR1IH9z6a0OTo2c4XCloNYJbv9gnPcIq1smz5MfgAK62AnCKQ24b4-enpMjjUMQqMVsZDUNoSwOlbUNT4Bg88HSO1JBc5luWJn0c4mZe7Q8jbJb63eo4BBCcUHQ-_AZgQL9qszqoVDIaIQ
+
+### Create Offer (Requires JWT)
+POST http://localhost:8000/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDc0MDI3NTIsImV4cCI6MTc0NzQwNjM1Miwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6Im1hc3RlckBleGFtcGxlLmNvbSJ9.bdguBQmR57ot7cC_Q4981WDNrUkmOKCYtoHnLOfHhwoU2cgkEIloVW9JpLC834Ow98bI6hB_HNLKBhGTA1ZGdkS5hAFzeHDg3c3HPqqwYt6cnXETXqNrgcANEG61s3JFSMvmu-50gTjVVYnpiDgUIJSj4QER0o1A5cLu3oPSSHnYW8Ck7B6NBnbVw85Ux08XkjXAUZ5HaKlVTARxpHshLfwkCkLJ0x0b1-s2hN2goP8-mSWExH55f9u_MuaHmaehB89mZoRIuW9-kTX5uzr2UD9I1yuPaG9YL7QzxqknJpOK-dHSh53cw40zXFSYBZzjfKDM3-O3cL7_9vS1pQLQLw
+
+
+{
+  "name": "Offre Famille",
+  "description": "Quatre personnes",
+  "price": 1200,
+  "max_people": 5000
+}
+
+### Get All Users (Requires Admin JWT)
+GET http://localhost:8000/api/users
+Authorization: Bearer {{JWT}}
+
+### Créer un nouvel utilisateur
+POST http://127.0.0.1:8000/api/users/register
+Content-Type: application/json
+
+{
+  "first_name": "Michel",
+  "last_name": "Durand",
+  "email": "michel.durand@example.com",
+  "password": "Michel@2024"
+}
+
+
+### Verify Ticket (Requires Controller JWT)
+GET http://localhost:8000/api/orders/verify-ticket/1234567890
+Authorization: Bearer {{JWT}}
+
+### Création utilisateur de test
+POST http://localhost:8000/api/users/register
+Content-Type: application/json
+
+{
+  "first_name": "Test",
+  "last_name": "User",
+  "email": "authtest@example.com",
+  "password": "Test@123"
+}
+
+### Création utilisateur
+POST http://127.0.0.1:8000/api/users/register
+Content-Type: application/json
+
+{
+"first_name": "Scan",
+"last_name": "Test",
+"email": "scan.test@example.com",
+"password": "Scan@123"
+}
+### Création utilisateur admin
+POST http://127.0.0.1:8000/api/users/register
+Content-Type: application/json
+
+{
+  "first_name": "Master",
+  "last_name": "myname",
+  "email": "master@example.com",
+  "password": "Master@123",
+  "roles": ["ROLE_ADMIN"]
+}
+
+
+###
+POST http://127.0.0.1:8000/api/users/register
+Content-Type: application/json
+
+{
+"first_name": "Jean",
+"last_name": "Dupont",
+"email": "jean.dupont@example.com",
+"password": "Jean@1234"
+}
+### Authentification utilisateur
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "michel.durand@example.com",
+  "password": "Michel@2024"
+}
+
+

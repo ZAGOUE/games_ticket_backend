@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectResources">
+    <resource url="https://schema.phpunit.de/9.6/phpunit.x" location="$USER_HOME$/Downloads/PHP/phpunit.xsd" />
+    <resource url="https://schema.phpunit.de/9.6/phpunit.xsd" location="" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="23" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

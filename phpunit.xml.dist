@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="file:///C:/Projet_STUDI/games-ticket-backend/config/schemas/phpunit.xsd"
+
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true">
+
+    <php>
+        <env name="APP_ENV" value="test" />
+        <env name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="DATABASE_URL" value="mysql://root:@127.0.0.1:3306/games_ticket_db?serverVersion=8.0.42" />
+
+        <!-- Variables JWT -->
+        <env name="JWT_SECRET_KEY" value="%kernel.project_dir%/config/jwt/private.pem" />
+        <env name="JWT_PUBLIC_KEY" value="%kernel.project_dir%/config/jwt/public.pem" />
+        <env name="JWT_PASSPHRASE" value="f3bbd05b101720e9025ba643de7d337d69747bd7bb90fb01bcff55174a2cd6fa" />
+    </php>
+
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory suffix="Test.php">tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <!-- Dossier à exclure -->
+            <directory>src/DataFixtures</directory>
+
+            <!-- Fichiers à exclure -->
+            <file>src/Entity/AdminLog.php</file>
+            <file>src/Controller/AdminLogController.php</file>
+            <file>src/Controller/AdminStatsController.php</file>
+            <file>src/Controller/PaymentController.php</file>
+            <file>src/Repository/AdminLogRepository.php</file>
+            <file>src/Repository/PaymentRepository.php</file>
+            <file>src/Kernel.php</file>
+        </exclude>
+    </coverage>
+</phpunit>
