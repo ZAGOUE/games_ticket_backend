@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\PaymentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use App\Entity\User;
+use App\Entity\TicketOrder;
 
 #[ORM\Entity(repositoryClass: PaymentRepository::class)]
 class Payment
@@ -11,76 +14,68 @@ class Payment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['payment:read', 'order:read'])]
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $order_id = null;
-
-    #[ORM\Column]
-    private ?float $amount = null;
+    #[Groups(['payment:read', 'order:read'])]
+    private ?int $amount = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['payment:read', 'order:read'])]
     private ?string $payment_status = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
+    #[Groups(['payment:read'])]
     private ?\DateTimeImmutable $created_at = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[ORM\ManyToOne(inversedBy: 'payments')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['payment:read'])]
+    private ?User $user = null;
 
-    public function setId(int $id): static
-    {
-        $this->id = $id;
+    #[ORM\OneToOne(mappedBy: 'payment', cascade: ['persist', 'remove'])]
 
-        return $this;
-    }
+    private ?TicketOrder $ticketOrder = null;
 
-    public function getOrderId(): ?int
-    {
-        return $this->order_id;
-    }
+    public function getId(): ?int { return $this->id; }
 
-    public function setOrderId(int $order_id): static
-    {
-        $this->order_id = $order_id;
+    public function getAmount(): ?int { return $this->amount; }
 
-        return $this;
-    }
-
-    public function getAmount(): ?float
-    {
-        return $this->amount;
-    }
-
-    public function setAmount(float $amount): static
-    {
+    public function setAmount(int $amount): self {
         $this->amount = $amount;
-
         return $this;
     }
 
-    public function getPaymentStatus(): ?string
-    {
-        return $this->payment_status;
-    }
+    public function getPaymentStatus(): ?string { return $this->payment_status; }
 
-    public function setPaymentStatus(string $payment_status): static
-    {
+    public function setPaymentStatus(string $payment_status): self {
         $this->payment_status = $payment_status;
-
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
+    public function getCreatedAt(): ?\DateTimeImmutable { return $this->created_at; }
+
+    public function setCreatedAt(?\DateTimeImmutable $created_at): self {
+        $this->created_at = $created_at;
+        return $this;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
-    {
-        $this->created_at = $created_at;
+    public function getUser(): ?User { return $this->user; }
+
+    public function setUser(?User $user): self {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function getTicketOrder(): ?TicketOrder { return $this->ticketOrder; }
+
+    public function setTicketOrder(?TicketOrder $ticketOrder): self {
+        $this->ticketOrder = $ticketOrder;
+
+        if ($ticketOrder && $ticketOrder->getPayment() !== $this) {
+            $ticketOrder->setPayment($this);
+        }
 
         return $this;
     }

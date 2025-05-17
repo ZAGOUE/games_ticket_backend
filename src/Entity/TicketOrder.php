@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TicketOrderRepository;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeImmutable;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TicketOrderRepository::class)]
 class TicketOrder
@@ -12,92 +12,61 @@ class TicketOrder
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['order:read'])]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['order:read'])]
+    private ?string $order_key = null;
+
+    #[ORM\Column(length: 50)]
+    #[Groups(['order:read'])]
+    private ?string $status = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['order:read'])]
+    private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['order:read'])]
+    private ?\DateTimeImmutable $validated_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ticketOrders')]
     #[ORM\JoinColumn(nullable: false)]
-    private User $user;
+    #[Groups(['order:read'])]
+    private ?User $user = null;
 
-    #[ORM\ManyToOne(targetEntity: Offer::class)]
+    #[ORM\ManyToOne(inversedBy: 'ticketOrders')]
     #[ORM\JoinColumn(nullable: false)]
-    private Offer $offer;
+    #[Groups(['order:read'])]
+    private ?Offer $offer = null;
 
-    #[ORM\Column(type: 'integer', nullable: false)]
-    private int $quantity;
+    #[ORM\Column]
+    #[Groups(['order:read'])]
+    private ?int $quantity = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $status = 'PENDING'; // Par défaut, commande en attente
-
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?DateTimeImmutable $created_at;
-
-    #[ORM\Column(name: 'order_key', type: 'string', length: 255, unique: true)]
-    private string $orderKey;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: false)]
-    private string $qrcode;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $validatedAt = null;
-
-    public function __construct()
-    {
-        $this->created_at = new DateTimeImmutable();
-
-        $this->created_at = new \DateTimeImmutable();
-        $this->qrcode = bin2hex(random_bytes(16)); // Génère une valeur aléatoire
-    }
-
-    public function getValidatedAt(): ?\DateTime
-    {
-        return $this->validatedAt;
-    }
-
-    public function setValidatedAt(?\DateTime $validatedAt): self
-    {
-        $this->validatedAt = $validatedAt;
-        return $this;
-    }
+    #[ORM\OneToOne(inversedBy: 'ticketOrder', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)] //
+    #[Groups(['order:read'])]
+    private ?Payment $payment = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): User
+    public function getOrderKey(): ?string
     {
-        return $this->user;
+        return $this->order_key;
     }
 
-    public function setUser(User $user): self
+    public function setOrderKey(?string $order_key): self
     {
-        $this->user = $user;
+        $this->order_key = $order_key;
         return $this;
     }
 
-    public function getOffer(): Offer
-    {
-        return $this->offer;
-    }
-
-    public function setOffer(Offer $offer): self
-    {
-        $this->offer = $offer;
-        return $this;
-    }
-
-    public function getQuantity(): int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-        return $this;
-    }
-
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -108,35 +77,74 @@ class TicketOrder
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
     }
 
-    public function getOrderKey(): string
+    public function setCreatedAt(?\DateTimeImmutable $created_at): self
     {
-        return $this->orderKey;
-    }
-
-    public function setOrderKey(string $orderKey): self
-    {
-        $this->orderKey = $orderKey;
+        $this->created_at = $created_at;
         return $this;
     }
 
-    public function getQrcode(): string
+    public function getValidatedAt(): ?\DateTimeImmutable
     {
-        return $this->qrcode;
+        return $this->validated_at;
     }
 
-    public function setQrcode(string $qrcode): void
+    public function setValidatedAt(?\DateTimeImmutable $validated_at): self
     {
-        $this->qrcode = $qrcode;
-    }
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->created_at = $createdAt;
+        $this->validated_at = $validated_at;
         return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function getOffer(): ?Offer
+    {
+        return $this->offer;
+    }
+
+    public function setOffer(?Offer $offer): self
+    {
+        $this->offer = $offer;
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): self
+    {
+        $this->payment = $payment;
+        return $this;
+    }
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
     }
 
 }

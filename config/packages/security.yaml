@@ -23,7 +23,10 @@ security:
             stateless: true
             security: false
 
-
+        public:
+            pattern: ^/api/offers
+            stateless: true
+            security: false
 
         main:
             lazy: true
@@ -34,9 +37,11 @@ security:
 
 
     access_control:
-        - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST ] }   # ✅ très précis, POST uniquement
+        - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST ] }
         - { path: ^/api/users/register, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST ] }
+        - { path: ^/api/offers, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET ] }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+
 
 
 when@test:

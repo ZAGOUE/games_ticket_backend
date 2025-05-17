@@ -56,7 +56,8 @@ class OfferController extends AbstractController
     public function getAllOffers(OfferRepository $offerRepository): JsonResponse
     {
         $offers = $offerRepository->findAll();
-        return $this->json($offers);
+        return $this->json($offers, 200, [], ['groups' => 'offer:read']);
+
     }
 
     #[Route('/{id}', methods: ['GET'])]
@@ -72,7 +73,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/{id}', methods: ['PUT'])]
-    #[IsGranted('ROLE_ADMIN')]
+   // #[IsGranted('ROLE_ADMIN')]
     public function updateOffer(Request $request, OfferRepository $offerRepository, EntityManagerInterface $entityManager, int $id): JsonResponse
     {
         $offer = $offerRepository->find($id);
@@ -106,7 +107,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/{id}', methods: ['DELETE'])]
-    #[IsGranted('ROLE_ADMIN')]
+   //#[IsGranted('ROLE_ADMIN')]
     public function deleteOffer(OfferRepository $offerRepository, EntityManagerInterface $entityManager, int $id): JsonResponse
     {
         $offer = $offerRepository->find($id);
