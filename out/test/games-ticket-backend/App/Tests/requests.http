@@ -20,8 +20,8 @@ POST http://localhost:8000/api/login
 Content-Type: application/json
 
 {
-  "email": "utilisateur@example.com",
-  "password": "User@123"
+  "email": "koffi@example.com",
+  "password": "Koffi123!"
 }
 
 ### Login Controller
@@ -35,7 +35,7 @@ Content-Type: application/json
 
 ### Get All Offers (Requires JWT)
 GET http://localhost:8000/api/offers
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDcwODA4NjMsImV4cCI6MTc0NzA4NDQ2Mywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlckBleGFtcGxlLmNvbSJ9.jj3tTl3q3NZWUxVc_CG07G6Tqtd0Rj6fK7wZU3Zy6jjDDO43LgTfOrfZRaZhaEODNzSREVXJtdyPsN8Sog3_V4Eb14MxEptA8fZFHtm1qP_Eynr9DYyqdYx1imSZUzZuYK0ABi4FN0wNYtbxPsgPUg2tDmTvXYbJ_oWuSBdaHRmfNEiUK34x_pd_HVA5lwWviO9ecQ0DXR1IH9z6a0OTo2c4XCloNYJbv9gnPcIq1smz5MfgAK62AnCKQ24b4-enpMjjUMQqMVsZDUNoSwOlbUNT4Bg88HSO1JBc5luWJn0c4mZe7Q8jbJb63eo4BBCcUHQ-_AZgQL9qszqoVDIaIQ
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDc0Njc3NzEsImV4cCI6MTc0NzQ3MTM3MSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.rYl0O1tGXhbs1ePIAqT_fuWlT4xmy0pqnWLu9_Wu_RLLLA-X5vT1TzPGsLEDeT-Sw-aHyyLm8cGFCk10kPf4bn9zxxh_mcO-wkqqqQydbnylwKS_oUMu4ZIG6hGy1bF59i3S_EWeX3BMk0xA5bYXiBTknv3RkHVfRzLzQ1PmJjRx9SNjiORN65XyGRD6XVaSDLGdc_FhbySTgxp9XS79jcGU87T7hklpwcvPJWjbbmWo_j9boGylXuhSalAzm8vSUJeu-rUuQEQ6rxPGjppQQaBAZ_ECnEY1Q0_PnZMghHqVwrBPFyqWnPO7VFjJUP2l6pVsi4y-2oGV4fBzUZmwzw
 
 ### Create Offer (Requires JWT)
 POST http://localhost:8000/api/offers
@@ -124,3 +124,12 @@ Content-Type: application/json
 }
 
 
+### Tester l'affichage des offres (publique, sans authentification)
+GET http://127.0.0.1:8000/api/offers
+Accept: application/json
+
+### Récupérer les commandes de l'utilisateur connecté (ROLE_USER)
+GET http://127.0.0.1:8000/api/orders
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDc0NjgwNjIsImV4cCI6MTc0NzQ3MTY2Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoia29mZmlAZXhhbXBsZS5jb20ifQ.HQsJTDI9Z15RWwGT-PSiB-CVyMOai2AP3e7RlWL3EPKLuNp4nbEcudPoxm8WMKAijEx4ybihJXObpOvaEqi0Vewy0Wo1eVartDpMbg_D2VXuLf2nrIS5W3fcfh-3V97DqQgW0LGtdjYl08xlClDV3rI72920Qem_f42u6x2qYJKnbUFbBTkx6y7NVcSJ2wACu8VQ6tQthPLhBApZdUrBylJS1VV6_YKknqSkCra0FaDYBbCaRSJYXIxkN5eiMJm0VW4Zxc8wyJK5aHxRASvPvKlTG4fiY0PKTHj8edKfOFczQW1gu_AKoIVaKxSBzN9MGoCmTzfaAN2hESRFgQIFZw
+
+Accept: application/json

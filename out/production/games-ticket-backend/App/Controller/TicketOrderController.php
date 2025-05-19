@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Payment;
 use App\Entity\TicketOrder;
 use App\Repository\OfferRepository;
 use App\Repository\TicketOrderRepository;
@@ -19,8 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 use TCPDF;
-
-
 
 
 
@@ -50,6 +49,7 @@ class TicketOrderController extends AbstractController
         $order->setOffer($offer);
         $order->setQuantity($data['quantity']);
         $order->setOrderKey(bin2hex(random_bytes(16)));
+        $order->setStatus('PENDING');
         $this->generateQrCode($order->getOrderKey());
 
 
@@ -68,7 +68,15 @@ class TicketOrderController extends AbstractController
     public function getOrders(TicketOrderRepository $orderRepository): JsonResponse
     {
         $orders = $orderRepository->findBy(['user' => $this->getUser()]);
-        return $this->json($orders);
+        return $this->json(
+            $orders,
+            200,
+            [],
+            [
+                'groups' => ['order:read'],
+                'circular_reference_handler' => fn ($object) => $object->getId(),
+            ]
+        );
     }
 
     #[Route('/{id<\d+>}', name: 'get_order', methods: ['GET'])]
@@ -126,14 +134,23 @@ class TicketOrderController extends AbstractController
             return new JsonResponse(['error' => 'Commande non trouvée'], 404);
         }
 
-        $order->setStatus('PAID');
-        $order->setOrderKey(bin2hex(random_bytes(16))); // Génération d'une clé unique 32 caractères hexadécimaux
+        $payment = new Payment();
+        $payment->setUser($this->getUser());
+        $payment->setAmount($order->getOffer()->getPrice() * $order->getQuantity());
+        $payment->setPaymentStatus('PAID');
+        $payment->setCreatedAt(new \DateTimeImmutable());
 
+        $entityManager->persist($payment);
+
+        $order->setStatus('PAID');
+        $order->setOrderKey(bin2hex(random_bytes(16)));
+        $order->setPayment($payment);
 
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Paiement effectué avec succès', 'order_key' => $order->getOrderKey()
-
+        return new JsonResponse([
+            'message' => 'Paiement effectué avec succès',
+            'order_key' => $order->getOrderKey()
         ]);
     }
 
@@ -259,7 +276,8 @@ class TicketOrderController extends AbstractController
         EntityManagerInterface $entityManager,
         string $order_key
     ): JsonResponse {
-        $order = $orderRepository->findOneBy(['orderKey' => $order_key]);
+        $order = $orderRepository->findOneBy(['order_key' => $order_key]);
+
 
         if (!$order) {
             return new JsonResponse([
@@ -302,7 +320,7 @@ class TicketOrderController extends AbstractController
 
         // 👇 Tout est OK : validation finale
         $order->setStatus('USED');
-        $order->setValidatedAt(new \DateTime());
+        $order->setValidatedAt(new \DateTimeImmutable());
         $entityManager->flush();
 
         return new JsonResponse([

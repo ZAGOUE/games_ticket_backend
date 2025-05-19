@@ -53,6 +53,7 @@ class UserController extends AbstractController
             }
             return new JsonResponse(['errors' => $errorMessages], 400);
         }
+        $user->setCreatedAt(new \DateTimeImmutable());
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, $data['password']);
         $user->setPassword($hashedPassword);
