@@ -5,19 +5,20 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.2",
+        "ext-pdo": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/annotations": "^2.0",
-        "doctrine/dbal": "^3",
+        "doctrine/annotations": "^2.0.2",
+        "doctrine/dbal": "^3.9.4",
         "doctrine/doctrine-bundle": "^2.14",
-        "doctrine/doctrine-migrations-bundle": "^3.4",
-        "doctrine/orm": "^3.3",
-        "endroid/qr-code": "^6.0",
-        "lexik/jwt-authentication-bundle": "^3.1",
+        "doctrine/doctrine-migrations-bundle": "^3.4.2",
+        "doctrine/orm": "^3.3.3",
+        "endroid/qr-code": "^6.0.8",
+        "lexik/jwt-authentication-bundle": "^3.1.1",
         "nelmio/cors-bundle": "^2.5",
         "symfony/console": "7.2.*",
         "symfony/dotenv": "7.2.*",
-        "symfony/flex": "^2",
+        "symfony/flex": "^2.5.1",
         "symfony/framework-bundle": "7.2.*",
         "symfony/runtime": "7.2.*",
         "symfony/security-bundle": "7.2.*",
@@ -25,7 +26,7 @@
         "symfony/uid": "7.2.*",
         "symfony/validator": "7.2.*",
         "symfony/yaml": "7.2.*",
-        "tecnickcom/tcpdf": "^6.9"
+        "tecnickcom/tcpdf": "^6.9.4"
     },
     "config": {
         "allow-plugins": {
@@ -57,6 +58,7 @@
         "symfony/polyfill-php82": "*"
     },
     "scripts": {
+        "start": "php -S 0.0.0.0:8000 -t public",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
@@ -79,10 +81,10 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.1",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.6.23",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
         "symfony/maker-bundle": "^1.63",
-        "symfony/phpunit-bridge": "^7.2"
+        "symfony/phpunit-bridge": "^7.2.6"
     }
 }
