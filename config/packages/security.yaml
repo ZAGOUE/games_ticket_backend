@@ -9,6 +9,10 @@ security:
                 property: email
 
     firewalls:
+        cors:
+            pattern: ^/api/
+            security: false
+            methods: [ 'OPTIONS' ]
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
