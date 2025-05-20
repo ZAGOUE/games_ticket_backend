@@ -1,12 +1,11 @@
 nelmio_cors:
     defaults:
         origin_regex: true
-        allow_origin:
-            - '^https?://localhost:[0-9]+$'
-            - '^https://.*\.netlify\.app$'
-            - 'https://games-ticket.netlify.app'  # <- Ajout de l’URL personnalisée
+        allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
         allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-        allow_headers: ['Content-Type', 'Authorization', 'X-Requested-With']
+        allow_headers: ['Content-Type', 'Authorization']
         expose_headers: ['Content-Type', 'Authorization']
         max_age: 3600
         allow_credentials: true
+    paths:
+        '^/': ~
