@@ -1,9 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    Options +SymLinksIfOwnerMatch
+
     
-    RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
-    RewriteRule .* - [E=BASE:%1]
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ index.php [QSA,L]
+
 
     RewriteCond %{HTTP:Authorization} .+
     RewriteRule ^ - [E=HTTP_AUTHORIZATION:%0]

@@ -36,6 +36,7 @@ security:
             lazy: true
             provider: app_user_provider
             stateless: true
+            anonymous: true
             jwt: ~
             entry_point: jwt
 
@@ -45,6 +46,7 @@ security:
         - { path: ^/api/users/register, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST ] }
         - { path: ^/api/offers, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET ] }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/test-cors, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 
 
