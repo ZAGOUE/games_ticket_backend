@@ -13,5 +13,6 @@ class CorsTestController extends AbstractController
     public function test(): Response
     {
         return new Response('CORS OK!');
+        $response->headers->set('X-Debug', 'Symfony reached');
     }
 }
