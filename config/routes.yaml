@@ -8,3 +8,9 @@ api_users_register:
     path: /api/users/register
     controller: App\Controller\UserController::register
     methods: [POST, OPTIONS]
+
+# config/routes.yaml
+offers:
+    path: /offers
+    controller: App\Controller\OfferController::index
+    methods: [GET]
