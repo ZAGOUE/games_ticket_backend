@@ -3,3 +3,8 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+# config/routes.yaml
+api_users_register:
+    path: /api/users/register
+    controller: App\Controller\UserController::register
+    methods: [POST, OPTIONS]
