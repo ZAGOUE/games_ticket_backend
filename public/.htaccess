@@ -1,19 +1,5 @@
-<IfModule mod_headers.c>
-    # Autoriser le domaine frontend
-    SetEnvIf Origin "^https://games-ticket\.netlify\.app$" CORS_ALLOW_ORIGIN=$0
-    Header set Access-Control-Allow-Origin "%{CORS_ALLOW_ORIGIN}e" env=CORS_ALLOW_ORIGIN
-    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
-</IfModule>
-
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
-    # Gestion spéciale des requêtes OPTIONS
-    RewriteCond %{REQUEST_METHOD} OPTIONS
-    RewriteRule ^(.*)$ $1 [R=204,L,E=CORS_ALLOW_ORIGIN:%{HTTP:ORIGIN}]
-
-    # Règles existantes...
     Options +SymLinksIfOwnerMatch
     
     RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
@@ -28,5 +14,3 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ %{ENV:BASE}/index.php [L]
 </IfModule>
-
-# Le reste de votre configuration originale...
