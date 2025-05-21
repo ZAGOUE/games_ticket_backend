@@ -36,7 +36,6 @@ security:
             lazy: true
             provider: app_user_provider
             stateless: true
-            anonymous: true
             jwt: ~
             entry_point: jwt
 
