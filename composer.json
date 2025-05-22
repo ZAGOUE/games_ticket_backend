@@ -18,7 +18,7 @@
         "endroid/qr-code": "^6.0.8",
         "lexik/jwt-authentication-bundle": "^3.1.1",
         "nelmio/cors-bundle": "^2.5",
-        "symfony/apache-pack": "^1.0",
+        "symfony/apache-pack": "^1.0.1",
         "symfony/console": "7.2.*",
         "symfony/dotenv": "7.2.*",
         "symfony/flex": "^2.5.1",
@@ -38,8 +38,8 @@
             "symfony/runtime": true
         },
         "platform": {
-            "php": "8.2",
-            "ext-gd": "*"
+            "php": "8.2"
+
         },
         "bump-after-update": true,
         "sort-packages": true
