@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -70,6 +72,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:read'])]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\OneToMany(mappedBy: 'admin', targetEntity: AdminLog::class)]
+    private Collection $adminLogs;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Payment::class)]
+    private Collection $payments;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: TicketOrder::class)]
+    private Collection $ticketOrders;
+
+    public function __construct()
+    {
+        $this->adminLogs = new ArrayCollection();
+        $this->payments = new ArrayCollection();
+        $this->ticketOrders = new ArrayCollection();
+    }
+
     public function getId(): ?int { return $this->id; }
 
     public function getEmail(): ?string { return $this->email; }
@@ -134,4 +152,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->created_at = $created_at;
         return $this;
     }
+    public function getAdminLogs(): Collection
+    {
+        return $this->adminLogs;
+    }
+
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function getTicketOrders(): Collection
+    {
+        return $this->ticketOrders;
+    }
+
+
 }

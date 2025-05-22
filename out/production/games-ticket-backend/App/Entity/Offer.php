@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -108,5 +110,12 @@ class Offer
     {
         $this->update_at = $update_at;
         return $this;
+    }
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: TicketOrder::class)]
+    private Collection $ticketOrders;
+
+    public function __construct()
+    {
+        $this->ticketOrders = new ArrayCollection();
     }
 }
