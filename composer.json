@@ -36,6 +36,9 @@
             "symfony/flex": true,
             "symfony/runtime": true
         },
+        "platform": {
+            "ext-gd": "*"
+        },
         "bump-after-update": true,
         "sort-packages": true
     },
