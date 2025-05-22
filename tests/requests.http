@@ -124,6 +124,8 @@ Content-Type: application/json
 }
 
 
+
+
 ### Tester l'affichage des offres (publique, sans authentification)
 GET http://127.0.0.1:8000/api/offers
 Accept: application/json
