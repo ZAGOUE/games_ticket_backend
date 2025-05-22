@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 -i apache_cors.conf public/
+web: vendor/bin/heroku-php-apache2 public/
