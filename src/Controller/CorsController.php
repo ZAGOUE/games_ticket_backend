@@ -1,6 +1,6 @@
 <?php
 
-// src/Controller/CorsController.php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
