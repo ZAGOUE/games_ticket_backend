@@ -175,7 +175,7 @@ POST https://games-ticket-backend-f3af92d920b6.herokuapp.com/api/offers/create
 Content-Type: application/json
 
 {
-"name": "Test distinct route",
+"name": "Test 2 distinct route",
 "description": "test",
 "price": 123,
 "max_people": 20
