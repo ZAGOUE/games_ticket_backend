@@ -23,6 +23,11 @@ security:
             stateless: true
             security: false
 
+        public:
+            pattern: ^/api/offers$
+            stateless: true
+            security: false
+
         main:
             lazy: true
             provider: app_user_provider

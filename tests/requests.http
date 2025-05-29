@@ -180,3 +180,5 @@ Content-Type: application/json
 "price": 123,
 "max_people": 20
 }
+### Get All Offers (sans Requires JWT)
+GET http://games-ticket-backend-f3af92d920b6.herokuapp.com/api/offers
