@@ -34,8 +34,8 @@ Content-Type: application/json
 }
 
 ### Get All Offers (Requires JWT)
-GET http://localhost:8000/api/offers
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDc0Njc3NzEsImV4cCI6MTc0NzQ3MTM3MSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.rYl0O1tGXhbs1ePIAqT_fuWlT4xmy0pqnWLu9_Wu_RLLLA-X5vT1TzPGsLEDeT-Sw-aHyyLm8cGFCk10kPf4bn9zxxh_mcO-wkqqqQydbnylwKS_oUMu4ZIG6hGy1bF59i3S_EWeX3BMk0xA5bYXiBTknv3RkHVfRzLzQ1PmJjRx9SNjiORN65XyGRD6XVaSDLGdc_FhbySTgxp9XS79jcGU87T7hklpwcvPJWjbbmWo_j9boGylXuhSalAzm8vSUJeu-rUuQEQ6rxPGjppQQaBAZ_ECnEY1Q0_PnZMghHqVwrBPFyqWnPO7VFjJUP2l6pVsi4y-2oGV4fBzUZmwzw
+GET http://games-ticket-backend-f3af92d920b6.herokuapp.com/api/offers
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDg1MDkzMTksImV4cCI6MTc0ODUxMjkxOSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.VQJ-nH5rCvSvI-sthTBiGgDYmRU6CT8tZWx0rs-B89fPJstn_fO5DH-ZtZ8thOs50Ze1mOP14o4Ucvg9sDqXos-WBH_9uCoLw262NZjKW4J2PR9y6MB519OIl_Crt_tA0xYOymeOGcO0BrXIxPWOeIWpo1y98ZU46cMQotOpQGh0hGM0RPUglgN2XJCzNQ5Sma8jjE8S2OLordiTttQCHJ5xjuKJUhQXM0uKstpin5UquxaqbvlVGxQUB6Qha47rmEGi3sSEke75GVPziIhHdbB4XM7eZr8xd48ohYC_JbFqi_vu0pmfxP1mM3leKR02qn858xiRhY1itXlYlzP-pg
 
 ### Create Offer (Requires JWT)
 POST http://localhost:8000/api/offers
@@ -135,3 +135,48 @@ GET http://127.0.0.1:8000/api/orders
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDc0NjgwNjIsImV4cCI6MTc0NzQ3MTY2Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoia29mZmlAZXhhbXBsZS5jb20ifQ.HQsJTDI9Z15RWwGT-PSiB-CVyMOai2AP3e7RlWL3EPKLuNp4nbEcudPoxm8WMKAijEx4ybihJXObpOvaEqi0Vewy0Wo1eVartDpMbg_D2VXuLf2nrIS5W3fcfh-3V97DqQgW0LGtdjYl08xlClDV3rI72920Qem_f42u6x2qYJKnbUFbBTkx6y7NVcSJ2wACu8VQ6tQthPLhBApZdUrBylJS1VV6_YKknqSkCra0FaDYBbCaRSJYXIxkN5eiMJm0VW4Zxc8wyJK5aHxRASvPvKlTG4fiY0PKTHj8edKfOFczQW1gu_AKoIVaKxSBzN9MGoCmTzfaAN2hESRFgQIFZw
 
 Accept: application/json
+
+
+### Login Admin
+POST http://games-ticket-backend-f3af92d920b6.herokuapp.com/api/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin@123"
+}
+
+### Create Offer (Requires JWT)
+POST http://games-ticket-backend-f3af92d920b6.herokuapp.com/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDg1MDkzMTksImV4cCI6MTc0ODUxMjkxOSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.VQJ-nH5rCvSvI-sthTBiGgDYmRU6CT8tZWx0rs-B89fPJstn_fO5DH-ZtZ8thOs50Ze1mOP14o4Ucvg9sDqXos-WBH_9uCoLw262NZjKW4J2PR9y6MB519OIl_Crt_tA0xYOymeOGcO0BrXIxPWOeIWpo1y98ZU46cMQotOpQGh0hGM0RPUglgN2XJCzNQ5Sma8jjE8S2OLordiTttQCHJ5xjuKJUhQXM0uKstpin5UquxaqbvlVGxQUB6Qha47rmEGi3sSEke75GVPziIhHdbB4XM7eZr8xd48ohYC_JbFqi_vu0pmfxP1mM3leKR02qn858xiRhY1itXlYlzP-pg
+
+
+{
+  "name": "Offre TEST",
+  "description": "requests.http",
+  "price": 1200,
+  "max_people": 5000
+}
+### Create Offer (sans Requires JWT)
+POST http://games-ticket-backend-f3af92d920b6.herokuapp.com/api/offers
+Content-Type: application/json
+
+
+{
+  "name": "Offre TEST",
+  "description": "requests.http",
+  "price": 1200,
+  "max_people": 5000
+}
+
+### TEST CREATION OFFRE
+POST https://games-ticket-backend-f3af92d920b6.herokuapp.com/api/offers/create
+Content-Type: application/json
+
+{
+"name": "Test distinct route",
+"description": "test",
+"price": 123,
+"max_people": 20
+}

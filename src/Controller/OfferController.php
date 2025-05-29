@@ -11,13 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/api/offers', name: 'api_offers_')]
+//#[Route('/api/offers', name: 'api_offers_')]
 class OfferController extends AbstractController
 {
-    #[Route('', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/api/offers/create', name: 'api_offers_create', methods: ['POST'])]
+  //  #[IsGranted('ROLE_ADMIN')]
     public function createOffer(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
+
+
         $data = json_decode($request->getContent(), true);
 
         if (!isset($data['name'], $data['description'], $data['price'], $data['max_people'])) {

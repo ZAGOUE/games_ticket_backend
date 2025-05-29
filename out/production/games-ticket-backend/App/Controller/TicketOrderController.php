@@ -253,11 +253,11 @@ class TicketOrderController extends AbstractController
 
 
         // Dessiner un cadre autour des informations
-        $pdf->Rect(15, 75, 180, 40, 'D'); // Avant : Y=45 → Maintenant : Y=70
+        $pdf->Rect(15, 75, 180, 40, 'D');
 
         // Générer et ajouter le QR Code
         $qrCodePath = $this->generateQrCode($order->getOrderKey());
-        $pdf->Image($qrCodePath, 75, 130, 60, 60, 'PNG'); // Avant : Y=90 → Maintenant : Y=130
+        $pdf->Image($qrCodePath, 75, 130, 60, 60, 'PNG');
 
         // Sortie du PDF
         $pdfContent = $pdf->Output('', 'S');
@@ -306,7 +306,7 @@ class TicketOrderController extends AbstractController
             ], 400);
         }
 
-        // 👇 Empêcher la réutilisation si déjà validé (mais statut pas à USED)
+        //Empêcher la réutilisation si déjà validé (mais statut pas à USED)
         if ($order->getValidatedAt() !== null) {
             $order->setStatus('USED');
             $entityManager->flush();
@@ -318,7 +318,7 @@ class TicketOrderController extends AbstractController
             ], 400);
         }
 
-        // 👇 Tout est OK : validation finale
+        //  validation finale
         $order->setStatus('USED');
         $order->setValidatedAt(new \DateTimeImmutable());
         $entityManager->flush();

@@ -18,6 +18,7 @@ class OfferController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function createOffer(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
+
         $data = json_decode($request->getContent(), true);
 
         if (!isset($data['name'], $data['description'], $data['price'], $data['max_people'])) {

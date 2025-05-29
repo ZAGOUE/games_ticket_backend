@@ -9,17 +9,8 @@ security:
                 property: email
 
     firewalls:
-        cors:
-            pattern: ^/api/
-            security: false
-            methods: [ 'OPTIONS' ]
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        register:
-            pattern: ^/api/users/register
-            stateless: true
             security: false
 
         login:
@@ -27,8 +18,8 @@ security:
             stateless: true
             security: false
 
-        public:
-            pattern: ^/api/offers
+        register:
+            pattern: ^/api/users/register
             stateless: true
             security: false
 
@@ -39,21 +30,15 @@ security:
             jwt: ~
             entry_point: jwt
 
-
     access_control:
         - { path: ^/api/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST ] }
         - { path: ^/api/users/register, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST ] }
-        - { path: ^/api/offers, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET ] }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/test-cors, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # ✅ D'abord GET public
+        - { path: ^/api/offers$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET ] }
 
 
 
-when@test:
-    security:
-        password_hashers:
-            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4
-                time_cost: 3
-                memory_cost: 10
+
+
+
