@@ -14,8 +14,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 //#[Route('/api/offers', name: 'api_offers_')]
 class OfferController extends AbstractController
 {
-    #[Route('/api/offers/create', name: 'api_offers_create', methods: ['POST'])]
-  //  #[IsGranted('ROLE_ADMIN')]
+    #[Route('/', name: 'create', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function createOffer(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
 
