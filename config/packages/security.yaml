@@ -42,8 +42,11 @@ security:
         # GET public uniquement
         - { path: ^/api/offers$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET ] }
 
-        # POST / PUT / DELETE pour les admins uniquement
-        - { path: ^/api/offers$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST] }
+        # POST/PUT/DELETE => admin only
+        - { path: ^/api/offers, roles: ROLE_ADMIN, methods: [ POST, PUT, DELETE ] }
+
+    # tout le reste
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 
 
