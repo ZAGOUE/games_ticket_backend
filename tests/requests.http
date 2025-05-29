@@ -153,9 +153,9 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDg1MDkzM
 
 
 {
-  "name": "Offre VALIDE",
+  "name": "Offre 20 VALIDE",
   "description": "requests.http",
-  "price": 1200,
+  "price": 1000,
   "max_people": 5000
 }
 ### Create Offer (sans Requires JWT)
