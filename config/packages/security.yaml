@@ -43,12 +43,9 @@ security:
         - { path: ^/api/offers$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET ] }
 
         # POST / PUT / DELETE pour les admins uniquement
+        - { path: ^/api/offers$, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST] }
 
 
-        - { path: ^/api/offers$, roles: ROLE_ADMIN, methods: [ POST, PUT, DELETE ] }
-
-        # Toutes les autres routes /api requièrent un token
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 
 
