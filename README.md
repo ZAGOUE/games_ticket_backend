@@ -7,25 +7,25 @@ Projet réalisé dans le cadre de la formation Studi – Développement d'applic
 
 ---
 
-## 🧰 Stack technique
+## Stack technique
 
-- ⚙️ Backend : Symfony 6 (PHP), Doctrine ORM
-- 🛡️ Sécurité : JSON Web Token (JWT), rôles utilisateurs
-- 🗄️ Base de données : MySQL
-- ☁️ Hébergement : Heroku (ClearDB pour MySQL)
+- Backend : Symfony 6 (PHP), Doctrine ORM
+- Sécurité : JSON Web Token (JWT), rôles utilisateurs
+- Base de données : MySQL
+- Hébergement : Heroku (ClearDB pour MySQL)
 
 ---
 
-## 📦 Installation du backend
+##  Installation du backend
 
-### 🔧 Prérequis
+###  Prérequis
 
 - PHP >= 8.1
 - Composer
 - Symfony CLI
 - MySQL
 
-### 🚀 Étapes
+###  Étapes
 
 ```bash
 git clone https://github.com/ZAGOUE/games-ticket-backend.git
@@ -33,15 +33,15 @@ cd games-ticket-backend
 composer install
 ```
 
-### ⚙️ Configuration `.env`
+###  Configuration `.env`
 
 ```env
 DATABASE_URL="mysql://<user>:<password>@127.0.0.1:3306/<dbname>"
 ```
 
-> ⚠️ Remplacez les valeurs par vos informations locales.
+>  Remplacez les valeurs par vos informations locales.
 
-### 🔐 Clés JWT
+###  Clés JWT
 
 ```bash
 mkdir -p config/jwt
@@ -62,7 +62,7 @@ php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 ```
 
-### ▶️ Lancer le serveur
+###  Lancer le serveur
 
 ```bash
 symfony server:start
@@ -70,7 +70,7 @@ symfony server:start
 
 ---
 
-## 🔒 Sécurité
+##  Sécurité
 
 - Authentification par token JWT
 - Rôles : `ROLE_USER`, `ROLE_ADMIN`, `ROLE_CONTROLLER`
@@ -80,16 +80,16 @@ symfony server:start
 
 ---
 
-## 📡 Endpoints principaux (extraits)
+##  Endpoints principaux (extraits)
 
-### 🔐 Authentification
+###  Authentification
 | Méthode | URL                                      | Description                                 |
 |---------|-------------------------------------------|---------------------------------------------|
 | POST    | /api/users/register                       | Inscription utilisateur                      |
 | POST    | /api/login                                | Authentification (retourne un JWT)           |
 | GET     | /api/me                                   | Infos de l'utilisateur connecté              |
 
-### 🎟️ Offres
+###  Offres
 | Méthode | URL                    | Description                  |
 |---------|-------------------------|------------------------------|
 | GET     | /api/offers             | Liste des offres             |
@@ -98,7 +98,7 @@ symfony server:start
 | PUT     | /api/offers/{id}        | Modifier une offre (admin)   |
 | DELETE  | /api/offers/{id}        | Supprimer une offre (admin)  |
 
-### 📦 Commandes
+###  Commandes
 | Méthode | URL                                | Description                         |
 |---------|-------------------------------------|-------------------------------------|
 | POST    | /api/orders                         | Créer une commande                   |
@@ -110,7 +110,7 @@ symfony server:start
 | GET     | /api/orders/{id}/download           | Télécharger le billet en PDF         |
 | GET     | /api/orders/verify-ticket/{key}     | Vérifier un billet (contrôleur)      |
 
-### 👤 Utilisateurs
+###  Utilisateurs
 | Méthode | URL                                | Description                         |
 |---------|-------------------------------------|-------------------------------------|
 | GET     | /api/users/{id}                     | Voir un utilisateur par ID          |
@@ -119,7 +119,7 @@ symfony server:start
 | PUT     | /api/users/{id}                     | Modifier un utilisateur             |
 | DELETE  | /api/users/{id}                     | Supprimer un utilisateur            |
 
-### 📊 Statistiques
+###  Statistiques
 | Méthode | URL                                | Description                         |
 |---------|-------------------------------------|-------------------------------------|
 | GET     | /api/admin/stats/offers             | Ventes par offre (admin)            |
@@ -127,7 +127,7 @@ symfony server:start
 
 ---
 
-## 🧪 Tests
+##  Tests
 
 Lancement des tests avec PHPUnit :
 
@@ -187,7 +187,7 @@ heroku run php bin/console doctrine:migrations:migrate
 ```
 
 ---
-## 🧭 Structure Git du projet
+##  Structure Git du projet
 
 Ce projet utilise une structure de branches claire :
 
@@ -198,7 +198,7 @@ Ce projet utilise une structure de branches claire :
 
 Les évolutions sont testées dans `test` avant d’être fusionnées dans `main`.
 
-## 🧑‍💻 Auteur
+##  Auteur
 
 Projet réalisé dans le cadre de la formation **Bachelor Développement d'applications Web** – Projet Games Ticket – 2025  
 © STUDI – Komi AGOUZE
