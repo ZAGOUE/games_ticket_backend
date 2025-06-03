@@ -1,6 +1,6 @@
 <?php
 
-// src/Controller/AuthController.php
+
 
 namespace App\Controller;
 
@@ -41,7 +41,7 @@ class AuthController extends AbstractController
         $user = $this->getUser();
 
         return $this->json([
-            'id' => $user->getId(), // 👈 ajoute ceci
+            'id' => $user->getId(),
             'email' => $user->getUserIdentifier(),
             'roles' => $user->getRoles()
         ]);

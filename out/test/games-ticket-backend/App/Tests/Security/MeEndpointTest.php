@@ -18,7 +18,7 @@ class MeEndpointTest extends WebTestCase
     {
         parent::setUp();
         $this->client = static::createClient();
-        $container = $this->client->getContainer(); // ✅ Important pour la couverture
+        $container = $this->client->getContainer();
         $this->em = $container->get(EntityManagerInterface::class);
         $this->hasher = $container->get(UserPasswordHasherInterface::class);
     }
@@ -47,7 +47,7 @@ class MeEndpointTest extends WebTestCase
         $this->em->persist($user);
         $this->em->flush();
 
-        // 🔐 Authentification
+        //Authentification
         $this->client->request(
             'POST',
             '/api/login',
@@ -64,7 +64,7 @@ class MeEndpointTest extends WebTestCase
         $this->assertArrayHasKey('token', $data);
         $token = $data['token'];
 
-        // ✅ Appel à /api/me avec token
+        // Appel à /api/me avec token
         $this->client->request(
             'GET',
             '/api/me',

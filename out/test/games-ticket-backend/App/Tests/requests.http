@@ -124,6 +124,8 @@ Content-Type: application/json
 }
 
 
+
+
 ### Tester l'affichage des offres (publique, sans authentification)
 GET http://127.0.0.1:8000/api/offers
 Accept: application/json
@@ -133,3 +135,26 @@ GET http://127.0.0.1:8000/api/orders
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDc0NjgwNjIsImV4cCI6MTc0NzQ3MTY2Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoia29mZmlAZXhhbXBsZS5jb20ifQ.HQsJTDI9Z15RWwGT-PSiB-CVyMOai2AP3e7RlWL3EPKLuNp4nbEcudPoxm8WMKAijEx4ybihJXObpOvaEqi0Vewy0Wo1eVartDpMbg_D2VXuLf2nrIS5W3fcfh-3V97DqQgW0LGtdjYl08xlClDV3rI72920Qem_f42u6x2qYJKnbUFbBTkx6y7NVcSJ2wACu8VQ6tQthPLhBApZdUrBylJS1VV6_YKknqSkCra0FaDYBbCaRSJYXIxkN5eiMJm0VW4Zxc8wyJK5aHxRASvPvKlTG4fiY0PKTHj8edKfOFczQW1gu_AKoIVaKxSBzN9MGoCmTzfaAN2hESRFgQIFZw
 
 Accept: application/json
+
+
+### Login Admin
+POST http://games-ticket-backend-f3af92d920b6.herokuapp.com/api/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin@123"
+}
+
+### Create Offer (Requires JWT)
+POST http://games-ticket-backend-f3af92d920b6.herokuapp.com/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDg1MDUwOTUsImV4cCI6MTc0ODUwODY5NSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.ZxAslgmCXiiqoRXq-B6C6ONGK3argUREqMdiA-Qgbc_-ML8hq9YT20eomts_DA8U5oZmw2EP-naoRS6fC6oVlBowSuzf9oxEeLA1decTk9GKiXnMaORNmCqj-tqQiqDv6xOdE9sepflyveMiTeVS1sxW0iavZugqfW1wE_jl2m5ZS84MwWcINmlkAZIA9hlC5MQM7T5Dt4rDVp7hRbdhs_0WAjcodwGK6z7nxz6Bo5P4sn-Dp_qrIYafvKCXHvAl3eQfGI_VPCiEQMuacxcnXpN_3VJjwvU2TNsNnRVHH4WmXYDl-O_-oT1mpJ7rtyzcucSQO62nbd1tiULPyg9w7Q
+
+
+{
+  "name": "Offre TEST",
+  "description": "requests.http",
+  "price": 1200,
+  "max_people": 5000
+}

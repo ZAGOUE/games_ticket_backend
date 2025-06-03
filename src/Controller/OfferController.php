@@ -14,10 +14,12 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/api/offers', name: 'api_offers_')]
 class OfferController extends AbstractController
 {
-    #[Route('', methods: ['POST'])]
+    #[Route('/', name: 'create', methods: ['POST'])]
+
     #[IsGranted('ROLE_ADMIN')]
     public function createOffer(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
+
         $data = json_decode($request->getContent(), true);
 
         if (!isset($data['name'], $data['description'], $data['price'], $data['max_people'])) {

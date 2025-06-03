@@ -41,6 +41,14 @@ class Offer
     #[Groups(['offer:read'])]
     private ?\DateTimeImmutable $update_at = null;
 
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: TicketOrder::class)]
+    private Collection $ticketOrders;
+
+    public function __construct()
+    {
+        $this->ticketOrders = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,11 +119,5 @@ class Offer
         $this->update_at = $update_at;
         return $this;
     }
-    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: TicketOrder::class)]
-    private Collection $ticketOrders;
 
-    public function __construct()
-    {
-        $this->ticketOrders = new ArrayCollection();
-    }
 }
