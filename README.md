@@ -130,7 +130,7 @@ symfony server:start
 ## 🧪 Tests
 
 Lancement des tests avec PHPUnit :
-branche de test créée
+
 
 ```bash
 php bin/phpunit
@@ -187,6 +187,16 @@ heroku run php bin/console doctrine:migrations:migrate
 ```
 
 ---
+## 🧭 Structure Git du projet
+
+Ce projet utilise une structure de branches claire :
+
+| Branche | Description                     |
+|---------|----------------------------------|
+| `main`  | Branche de production (stable)   |
+| `test`  | Branche de test/intégration      |
+
+Les évolutions sont testées dans `test` avant d’être fusionnées dans `main`.
 
 ## 🧑‍💻 Auteur
 
